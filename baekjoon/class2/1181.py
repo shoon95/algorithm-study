@@ -44,17 +44,6 @@
 ### 단어 정렬
 ### 1. 중복 제거
 
-from tempfile import template
-
-
-n = int(input())
-
-text=[]
-for _ in range(n):
-    text.append(input())
-
-text_1 = list(set(text)) # 중복 제거 완료
-
 ###2. 길이 순으로 정렬 
 ### temp 초기값으로 text_1의 첫번째 원소를 넣자
 ### 두 번째 값의 길이가 temp의 원소의 길이보다 길면 뒤로 짧으면 앞으로 넣자
@@ -63,30 +52,30 @@ text_1 = list(set(text)) # 중복 제거 완료
 ### dict 형식으로 가보자 모르겠고 dict 포기
 
 ### 원소들의 length를 구해서 리스트에 넣고 정렬 후 기존 단어의 길이가 해당 리스트의 원소 값과 같다면 새로운 (text_2) 리스트에 추가하자
-temp = []
-for i in text_1:
-    temp.append(len(i))
-temp.sort()
+n = int(input())
 
-temp2=[]
+text=[]
+for _ in range(n):
+    word = input()
+    if  word not in text:
+        text.append(word)
 
+text.sort(key=len)
 
-for i in temp:
-    temp3=[]
-    for j in text_1:
-        if i == len(j) :
-            temp3.append(j)
-        temp3 = sorted(temp3)
-  
-        temp2.extend(temp3)
+temp = sorted(list(set(map(lambda n : len(n), text))))
 
 
-text_2 =[]
-for i in temp2:
-    if i not in text_2:
-        text_2.append(i)
 ### 같은 길이의 단어를 어떻게 하면 알파벳 순으로 정렬할 수 있을까???
 ### 봐바 길이가 같은 부분의 인덱스와 값을 뽑아서 그 부분을 임시 저장해놓고 임시 저장해놓고, 임시 저장 변수를 정렬시켜
 ### 그리고 뽑아 놓은 인덱스에 다시 넣는거야 ㅇㅋ
-print(text_2)
+
+for i in temp:
+    text2=[]
+    for k in text:
+        if i == len(k):
+            text2.append(k)
+    text2.sort()
+    for j in text2:
+        print(j)
+
 
